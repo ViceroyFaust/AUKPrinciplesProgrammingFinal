@@ -1,6 +1,10 @@
+import java.io.*;
+
+
 public class SongCollection {
     private int count; // Storing number of elements
     private Song[] songs; // Array to store objects
+    private final String collectionFile;
 
     // Swaps two array elements in a Movie array
     private void swap(Song[] arr, int index1, int index2) {
@@ -13,6 +17,7 @@ public class SongCollection {
     public SongCollection() {
         count = 0;
         songs = new Song[1]; // Creating the smallest array, so I can demonstrate the use of dynamic arrays
+        collectionFile = "songs.txt";
     }
 
     // (1) Adds a Song to the collection (uses dynamic arrays; resizes the array to make sure everything fits)
@@ -93,6 +98,20 @@ public class SongCollection {
         for (int i = 0; i < count; ++i) {
             if (songs[i].releaseYear == year)
                 printShortOne(i);
+        }
+    }
+
+    // (9) Saves the contents of the collection to file
+    public void saveToFile() throws IOException {
+        FileWriter fileWrite = new FileWriter(collectionFile);
+        // The try-with-resources block will close the buffer regardless of whether an exception is thrown
+        // It is equivalent to a try-finally block. The exception is rethrown, because we don't want to handle
+        // Logging and similar actions at low-level functions
+        try (BufferedWriter writer = new BufferedWriter(fileWrite)) {
+            for (int i = 0; i < count; ++i) {
+                writer.write(songs[i].toMultilineString());
+                writer.write("\n");
+            }
         }
     }
 
