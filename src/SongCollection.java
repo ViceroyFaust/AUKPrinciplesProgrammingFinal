@@ -60,7 +60,7 @@ public class SongCollection {
 
     // Returns the year from line of formatted text; returns -1 for improper input
     private int parseYear(String line) {
-        String[] elements = line.split("^Author: ");
+        String[] elements = line.split("^Year: ");
         // Check whether there are enough elements and whether the year block can be parsed
         if (elements.length != 2 || !isNumber(elements[1]))
             return -1; // Returns 0 for improper input
@@ -164,6 +164,34 @@ public class SongCollection {
             for (int i = 0; i < count; ++i) {
                 writer.write(songs[i].toMultilineString());
                 writer.write("\n");
+            }
+        }
+    }
+
+    // (10) Reads the contents of a file and adds elements to the collection
+    public void readFromFile() throws IOException {
+        FileReader fileRead = new FileReader(collectionFile);
+        // The try-with-resources block will close the buffer regardless of whether an exception is thrown
+        // It is equivalent to a try-finally block. The exception is rethrown, because we don't want to handle
+        // Logging and similar actions at low-level functions
+        try (BufferedReader reader = new BufferedReader(fileRead)) {
+            String line;
+            String title = "";
+            String author = "";
+            int length = 0;
+            int year = 0;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                switch (count % 4) {
+                    case 0 -> { title = parseTitle(line); }
+                    case 1 -> { author = parseAuthor(line); }
+                    case 2 -> { length = parseLength(line); }
+                    case 3 -> {
+                        year = parseYear(line);
+                        add(new Song(title, author, length, year));
+                    }
+                }
+                ++count;
             }
         }
     }
