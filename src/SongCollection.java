@@ -47,25 +47,26 @@ public class SongCollection {
             newArray[index] = songs[index + 1]; // Shifts all songs after i to the "left" of the array
     }
 
-    // (3) Prints a single Song at index i using multiline format
+    // Prints a single song at index i in single line format along with index
+    public void printShortOne(int i) {
+        System.out.printf("%d: %s\n", i, songs[i].toString());
+    }
+
+    // (3) Prints a single Song at index i using multiline format along with index
     public void printOne(int i) {
-        Song song = songs[i];
-        System.out.println(song.toMultilineString());
+        System.out.printf("%d:\n%s\n", i, songs[i].toMultilineString());
     }
 
     // (4) Prints the collection's information in a detailed format
     public void printAll() {
-        for (int i = 0; i < count; ++i) {
-            System.out.printf("Index %d:\n", i);
+        for (int i = 0; i < count; ++i)
             printOne(i);
-        }
     }
 
     // (5) Prints enumerated list with one-line information about each song
     public void printList() {
-        for (int i = 0; i < count; ++i) {
-            System.out.printf("1: %s\n", songs[i].toString());
-        }
+        for (int i = 0; i < count; ++i)
+            printShortOne(i);
     }
 
     // (6) Sorts the collection via optimised bubble sort
@@ -90,7 +91,7 @@ public class SongCollection {
     public void findTitle(String substring) {
         for (int i = 0; i < count; ++i) {
             if (songs[i].getTitle().toLowerCase().contains(substring.toLowerCase())) // Case-insensitive substring search
-                System.out.printf("1: %s\n", songs[i].toString());
+                printShortOne(i);
         }
     }
 
@@ -98,7 +99,7 @@ public class SongCollection {
     public void searchYear(int year) {
         for (int i = 0; i < count; ++i) {
             if (songs[i].releaseYear == year)
-                System.out.printf("1: %s\n", songs[i].toString());
+                printShortOne(i);
         }
     }
 
