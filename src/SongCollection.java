@@ -2,16 +2,6 @@ public class SongCollection {
     private int count; // Storing number of elements
     private Song[] songs; // Array to store objects
 
-    // Copies elements from an old array to a new one. The new array must be >= old array.
-    private void copyArray(Song[] from, Song[] to) {
-        // IntelliJ notes that it would be better to use System.arraycopy(). However, I don't think we are allowed
-        // to use that type of function yet
-        // System.arraycopy(from, 0, to, 0, from.length);
-        for (int i = 0; i < from.length; ++i) {
-            to[i] = from[i];
-        }
-    }
-
     // Swaps two array elements in a Movie array
     private void swap(Song[] arr, int index1, int index2) {
         Song buffer = arr[index1];
@@ -29,7 +19,7 @@ public class SongCollection {
     public void add(Song song) {
         if (count == songs.length) {
             Song [] newArray = new Song[songs.length * 2]; // Creates a new array twice the size of the old one
-            copyArray(songs, newArray);
+            System.arraycopy(songs, 0, newArray, 0, songs.length);
             songs = newArray; // Replaces the old array with the new array
         }
         songs[count] = song;
@@ -38,13 +28,16 @@ public class SongCollection {
 
     // (2) Removes an element from the array and makes it contiguous
     public void remove(int i) {
+        if (count == 0) // prevent user from removing when array is empty; prevent crashes
+            return;
         // Create a new array with removed i and shift all elements after to make them contiguous
         Song[] newArray = new Song[songs.length];
         --count; // Decrement count, as there is now one less element
-        for (int index = 0; index < i; ++index) // Copies all elements before i to the new array
-            newArray[index] = songs[index];
-        for (int index = i; index < count; ++i)
-            newArray[index] = songs[index + 1]; // Shifts all songs after i to the "left" of the array
+        // Copies all elements before i to the new array
+        System.arraycopy(songs, 0, newArray, 0, i);
+        // Copies all elements after i into the new array, shifted to the "left"
+        System.arraycopy(songs, i + 1, newArray, i, count - i);
+        songs = newArray; // Assigns songs to reflect the new array
     }
 
     // Prints a single song at index i in single line format along with index
