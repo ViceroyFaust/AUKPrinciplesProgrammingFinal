@@ -162,12 +162,7 @@ public class Main {
         }
     }
 
-    public Main() {
-        songs = new SongCollection();
-        userInput = new Scanner(System.in); // Doesn't need to be closed, since it is a System stream
-    }
-
-    public boolean menu() {
+    private boolean menu() {
         printMenu();
         String choice = getUserString("Choice: ");
         switch (choice) {
@@ -184,6 +179,11 @@ public class Main {
             default -> System.out.println("ERROR: WRONG CHOICE");
         }
         return true;
+    }
+
+    public Main() {
+        songs = new SongCollection();
+        userInput = new Scanner(System.in); // Doesn't need to be closed, since it is a System stream
     }
 
     public void run() {
