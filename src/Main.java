@@ -43,7 +43,6 @@ public class Main {
     }
 
     private int getUserInt(String prompt) {
-        System.out.println(prompt);
         String input;
         boolean validityCheck;
         do {
