@@ -1,5 +1,5 @@
 
-final public class Song {
+public class Song {
     private String title; // (1) Private instance variables
     private String author;
 
