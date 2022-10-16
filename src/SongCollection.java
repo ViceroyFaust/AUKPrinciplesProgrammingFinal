@@ -28,42 +28,31 @@ public class SongCollection {
         arr[index2] = buffer;
     }
 
-    // Parses title from a formatted line. Returns an empty String in case of incorrect input
+    // Parses title from a formatted line.
     private String parseTitle(String line) {
         String[] elements = line.split("^Song: ");
-        if (elements.length != 2)
-            return ""; // Returns empty string for improper input
         String songQuotes = elements[1]; // String for song should always be second
         return songQuotes.substring(1, songQuotes.length() - 1); // remove quotes from string
     }
 
-    // Returns the author string from line of formatted text. If input improper, empty string is returned
+    // Returns the author string from line of formatted text.
     private String parseAuthor(String line) {
         String[] elements = line.split("^Author: ");
-        if (elements.length != 2)
-            return ""; // Returns empty string for improper input
         return elements[1]; // Author string should always be second
     }
 
-    // Returns length in seconds from formatted text; returns -1 for improper input
+    // Returns length in seconds from formatted text
     private int parseLength(String line) {
         String[] elements = line.split("^Length: ");
-        if (elements.length != 2) // Not enough elements = improper input
-            return -1;
         String[] numbers = elements[1].split(":");
-        if (numbers.length != 2 || !isNumber(numbers[0]) || !isNumber(numbers[1])) // Same as above check
-            return -1;
         int minutes = Integer.parseInt(numbers[0]);
         int seconds = Integer.parseInt(numbers[1]);
         return minutes * 60 + seconds;
     }
 
-    // Returns the year from line of formatted text; returns -1 for improper input
+    // Returns the year from line of formatted text
     private int parseYear(String line) {
         String[] elements = line.split("^Year: ");
-        // Check whether there are enough elements and whether the year block can be parsed
-        if (elements.length != 2 || !isNumber(elements[1]))
-            return -1; // Returns 0 for improper input
         return Integer.parseInt(elements[1]); // Author string should always be second
     }
 
