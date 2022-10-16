@@ -84,13 +84,13 @@ public class SongCollection {
     }
 
     // (4) Prints the collection's information in a detailed format
-    public void printAll() {
+    public void printDetailed() {
         for (int i = 0; i < count; ++i)
             printOne(i);
     }
 
     // (5) Prints enumerated list with one-line information about each song
-    public void printList() {
+    public void printSummarized() {
         for (int i = 0; i < count; ++i)
             printShortOne(i);
     }
@@ -114,7 +114,7 @@ public class SongCollection {
     }
 
     // (7) Finds and prints all movies where the substring is present in the title
-    public void findTitle(String substring) {
+    public void searchTitle(String substring) {
         for (int i = 0; i < count; ++i) {
             if (songs[i].getTitle().toLowerCase().contains(substring.toLowerCase())) // Case-insensitive substring search
                 printShortOne(i);
