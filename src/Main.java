@@ -49,7 +49,7 @@ public class Main {
             input = getUserString(prompt);
             validityCheck = isInt(input);
             if (!validityCheck)
-                System.out.print("ERROR: ENTER A VALID NUMBER");
+                System.out.println("ERROR: ENTER A VALID NUMBER");
         } while (!validityCheck);
         return Integer.parseInt(input);
     }

@@ -64,7 +64,7 @@ public class SongCollection {
 
     // (2) Removes an element from the array and makes it contiguous
     public void remove(int i) {
-        if (count == 0) // prevent user from removing when array is empty; prevent crashes
+        if (count == 0 || i < 0 || i >= count) // prevent user from removing when array is empty; prevent crashes
             return;
         // Create a new array with removed i and shift all elements after to make them contiguous
         Song[] newArray = new Song[songs.length];
