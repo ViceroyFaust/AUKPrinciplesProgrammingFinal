@@ -6,20 +6,6 @@ public class SongCollection {
     private Song[] songs; // Array to store objects
     private final String collectionFile;
 
-    // Checks if the input is an integer or not
-    public static boolean isNumber(String text) {
-        if (text.length() == 0 || (text.length() == 1 && text.charAt(0) == '-'))
-            return false;
-        int startIndex = 0;
-        if (text.charAt(0) == '-')
-            ++startIndex;
-        for (int i = startIndex; i < text.length(); ++i) {
-            char c = text.charAt(i);
-            if (c < '0' || c > '9') // Check if char is a number, if not return false
-                return false;
-        }
-        return true;
-    }
 
     // Swaps two array elements in a Movie array
     private void swap(Song[] arr, int index1, int index2) {
