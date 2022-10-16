@@ -175,23 +175,17 @@ public class SongCollection {
         // It is equivalent to a try-finally block. The exception is rethrown, because we don't want to handle
         // Logging and similar actions at low-level functions
         try (BufferedReader reader = new BufferedReader(fileRead)) {
-            String line;
-            String title = "";
-            String author = "";
-            int length = 0;
-            int year = 0;
-            int count = 0;
-            while ((line = reader.readLine()) != null) {
-                switch (count % 4) {
-                    case 0 -> { title = parseTitle(line); }
-                    case 1 -> { author = parseAuthor(line); }
-                    case 2 -> { length = parseLength(line); }
-                    case 3 -> {
-                        year = parseYear(line);
-                        add(new Song(title, author, length, year));
-                    }
-                }
-                ++count;
+            String line = reader.readLine();
+            while (line != null) {
+                String title = parseTitle(line);
+                line = reader.readLine();
+                String author = parseAuthor(line);
+                line = reader.readLine();
+                int length = parseLength(line);
+                line = reader.readLine();
+                int year = parseYear(line);
+                add(new Song(title, author, length, year));
+                line = reader.readLine();
             }
         }
     }
